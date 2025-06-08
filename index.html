@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Matrix Hearts</title>
+    <style>
+        body {
+            background-image: url('fondo.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            text-align: center;
+        }
+        .text {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            opacity: 0;
+            animation: fadeInText 3s ease-in-out forwards;
+            text-shadow: 0 0 10px white, 0 0 20px #ff0066;
+        }
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: #ff0066;
+            opacity: 0.8;
+            animation: fallDown 5s infinite linear;
+        }
+        @keyframes fallDown {
+            0% { transform: translateY(-100px); opacity: 0; }
+            100% { transform: translateY(100vh); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text">❤️ I like you ❤️</div>
+        <div class="hearts"></div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            heart.style.fontSize = (Math.random() * 2 + 1) + "rem";
+            document.querySelector(".hearts").appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 150);
+    </script>
+</body>
+</html>
